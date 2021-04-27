@@ -1,0 +1,87 @@
+@import "~bootstrap/scss/bootstrap.scss";
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+.app{
+  width: 100vw;
+  height: 100vh;
+  background: #0B0E11;
+  color: #DEE3EA;
+  font-family: Inter, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+}
+.login-container{
+  background: #151A21;
+  width: 50vw;
+  height: 50vh;
+  box-shadow:0 0 1px 1px #151A21;
+  border: none;
+  border-radius: 1em;
+  padding: 5vw;
+  display: flex;
+  flex-direction: column;
+  margin-bottom:10em ;
+}
+.sec-col{
+  color: #E73B33;
+}
+.login-btn{
+  background: #323D4D;
+  width:45vw;
+  height:6vh;
+  border:none;
+  color: inherit;
+  border-radius: 10px;
+  box-shadow:0 0 1px 1px #455266;
+  margin-top: 10vh;
+  align-self: center;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+  align-items: center;
+  font-size: 2rem;
+}
+.myName{
+  padding: 1.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+.myName>span{
+  margin-left: 8px;
+}
+.connect{
+  margin-right: 30px;
+}
+
+.tag-pills{
+  // background-color: rgb(102, 100, 228);
+  border-radius: 1.7em;
+  border:none;
+  margin-top: 1em;
+}
+@media screen and (max-width:'770px') {
+  .login-btn{
+    width:65vw;
+  }
+  .login-container{
+    width: 80vw;
+  }
+  .footer{
+    font-size: 1.5em;
+  }
+  .header{
+    font-size: 3em;
+  }
+}

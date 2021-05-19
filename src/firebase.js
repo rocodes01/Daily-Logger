@@ -9,5 +9,6 @@ let firebaseConfig = {
   measurementId: "G-9LXD3Y1SXL",
 };
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
 export default firebase;

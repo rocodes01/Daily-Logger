@@ -1,24 +1,93 @@
-// import logo from "./logo.svg";
 import "./App.scss";
-import firebase from "./firebase";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Loader from "./components/loader";
 import Home from "./components/home/Home";
 import Footer from "./components/footer/Footer";
 import Login from "./components/login/login";
+import { Power } from "react-bootstrap-icons";
+import {
+  Switch,
+  Route,
+  Redirect,
+  withRouter,
+  useHistory,
+} from "react-router-dom";
+import { auth } from "./firebase";
 
 const App = () => {
-  // const [loading, setLoading] = useState(true);
-  // setTimeout(() => {
-  //   setLoading(false);
-  // }, 1000);
+  const [token, setToken] = useState("");
+  const [user, setUser] = useState({});
+  const history = useHistory();
+  const [showMenu, setShowMenu] = useState(false);
+  useEffect(() => {
+    setToken(localStorage.getItem("token") || "");
+    let user = localStorage.getItem("user");
+    setUser(JSON.parse(user));
+  }, [token]);
+
+  const logout = () => {
+    auth
+      .signOut()
+      .then(() => {
+        // Sign-out successful.
+        localStorage.clear();
+        setToken("");
+        history.push("/login");
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
   return (
     <div className="app">
       <header className="header">
-        <h1>Daily Logger</h1>
-        <h5 style={{ marginLeft: "70px" }}>...Better Than Yesterday</h5>
+        <div className="appName">
+          <h1>Daily Logger</h1>
+          <h5 className="subHeader">...Better Everyday</h5>
+        </div>
+        {user && (
+          <div className="user">
+            <img
+              src={user.photoURL}
+              alt="user profile"
+              onClick={() => setShowMenu(!showMenu)}
+            />
+            {!showMenu && (
+              <div className="menu">
+                <p className="userName">{user?.displayName}</p>
+                <button
+                  className="logoutBtn"
+                  onClick={() => {
+                    logout();
+                    setShowMenu(false);
+                  }}
+                >
+                  <Power fill={"#e73b33"} />
+                </button>
+              </div>
+            )}
+          </div>
+        )}
       </header>
-      <Login />
+      {token.length > 0 ? (
+        <Switch>
+          <Route path="/">
+            <Home user={user} />
+          </Route>
+          <Route path="/home">
+            <Home user={user} />
+          </Route>
+        </Switch>
+      ) : (
+        <Switch>
+          <Route exact path="/">
+            <Login onSuccess={(token) => setToken(token)} />
+          </Route>
+          <Route path="/">
+            <Redirect to={"/"} />
+          </Route>
+        </Switch>
+      )}
       <Footer />
     </div>
   );

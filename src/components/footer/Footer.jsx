@@ -1,10 +1,11 @@
-import { EmojiHeartEyes, Github } from "react-bootstrap-icons";
-
+import { Github } from "react-bootstrap-icons";
+import logo from "../../assets/logo.png";
 const Footer = () => {
   return (
     <div className="footer">
       <div className="myName">
-        <EmojiHeartEyes fill="#E73B33" /> <span>Rohit Singh</span>
+        <img src={logo} alt="" width="40px" style={{ borderRadius: "50%" }} />
+        <span>Rocodes</span>
       </div>
       <div className="connect">
         <a

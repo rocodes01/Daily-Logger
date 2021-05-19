@@ -1,87 +1,404 @@
 @import "~bootstrap/scss/bootstrap.scss";
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+$primary-col: #0b0e11;
+$inner-col: #151a21;
+$sec-col: #e73b33;
+$text-col:#dee3ea;
+@mixin flexColumn($direction,$justify) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: $justify;
+}
+@mixin whiteBorder($col){
+  border:1px solid $col;
+}
+// *{
+//   border: 1px solid red;
+// }
 .app{
   width: 100vw;
   height: 100vh;
-  background: #0B0E11;
-  color: #DEE3EA;
+  background: $primary-col;
+  color: $text-col;
   font-family: Inter, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  @include flexColumn(column,center);
 
 }
-.login-container{
-  background: #151A21;
-  width: 50vw;
-  height: 50vh;
-  box-shadow:0 0 1px 1px #151A21;
-  border: none;
-  border-radius: 1em;
-  padding: 5vw;
-  display: flex;
-  flex-direction: column;
-  margin-bottom:10em ;
+.header{
+  @include flexColumn(row,space-between);
+  position: absolute;
+  top:0;
+  // @include whiteBorder(white);
+  padding: 10px;
+  width: 90vw;
+  .appName{
+    h1{
+      text-transform:uppercase;
+    }
+    .subHeader{
+      align-self: flex-end;
+      // width: fit-content;
+      font-size: 1em;
+      // margin-left: 50%;
+      color: $sec-col;
+    }
+  }
+  .user{
+    position: absolute;
+    right:0;
+    top:15px;
+    img{
+      border-radius: 10px;
+      width: 50px;
+    }
+    .menu{
+      position: fixed;
+      background: $inner-col;
+      border-radius: 5px;
+      text-align: center;
+      padding: 5px;
+      .logoutBtn{
+        background: none;
+        border:0;
+        outline: none;
+      }
+      .userName{
+        width: fit-content;
+        border-bottom: 1px solid $text-col;
+      }
+    }
+  }
 }
-.sec-col{
-  color: #E73B33;
+.login{
+  &-container{
+    @include flexColumn(column,space-evenly);
+    background: $inner-col;
+    width:90vw;
+    height: 50vh;
+    border-radius: 10px;
+    h1{
+      align-self: flex-start;
+      margin-left:0.5em;
+      margin-top: -14vh;
+    }
+    p{
+      margin-top: -17vh;
+      width: 90%;
+      margin-left: 0.5em;
+      span{
+        color: $sec-col;
+      }
+    }
+    .login-btn{
+      background: $primary-col;
+      color: inherit;
+      border: none;
+      border-radius: .5em;
+      outline: none;
+      width: 80vw;
+      height: 7vh;
+      box-shadow: 1px 1px 10px $primary-col;
+      margin-top: -7vh;
+    }
+
+  }
 }
-.login-btn{
-  background: #323D4D;
-  width:45vw;
-  height:6vh;
-  border:none;
-  color: inherit;
-  border-radius: 10px;
-  box-shadow:0 0 1px 1px #455266;
-  margin-top: 10vh;
-  align-self: center;
+  // @include flexColumn(column,space-between);
+.main{
+    @include flexColumn(row,space-evenly);
+
+    gap:1em;
+    width:90vw;
+    height: 60vh;
+    // margin-top: 5vh;
+    border-radius: 10px;
+    >*{
+      background: $inner-col;
+      border-radius: 1em;
+    }
+    &-center{
+      @include flexColumn(column,space-between);
+      flex-grow: 3;
+      height: inherit;
+      width: inherit;
+      &-search{
+        width:80vw;
+        height:50px;
+        margin-top: 10px;
+        input,button{
+          background: $primary-col;
+          border:none;
+          // background:none;
+          height:inherit;
+          outline: none;
+          color: #a7abaf;
+        }
+        input{
+          width:50%;
+          text-align:center;
+          border-radius:10px 0 0 10px;
+        }
+        button{
+            border-radius:0 10px 10px 0;
+            border-left: 1px solid #fff ;
+            border-left-style:inset ;
+            width:10%;
+          }
+          select{
+            width: 35%;
+            margin-left: 15px;
+            height: 40px;
+            background: none;
+            border:1px solid $sec-col;
+            color:inherit;
+            border-radius: 5px;
+            option{
+              background: inherit;
+            }
+          }
+      }
+      .logCard{
+        
+      }
+    }
+    &-left,&-right{
+      display: none;
+    }
+  }
+
+@media screen and (min-width:'900px') {
+  .login-container{
+    width: 40vw;
+    .login-btn{
+      width: 30vw;
+    }
+  }
 }
+
+
 
 .footer {
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  @include flexColumn(row,space-between );
   padding-left: 10px;
-  align-items: center;
   font-size: 2rem;
+  background: $pre-color;
+  box-shadow: -2px -2px 1px $inner-col;
 }
-.myName{
-  padding: 1.3em;
+.myName {
+  padding: 0.3em;
   display: flex;
   align-items: center;
   justify-content: center;
-  
 }
-.myName>span{
+.myName > span {
   margin-left: 8px;
 }
-.connect{
+.connect {
   margin-right: 30px;
 }
 
-.tag-pills{
-  // background-color: rgb(102, 100, 228);
-  border-radius: 1.7em;
-  border:none;
-  margin-top: 1em;
-}
-@media screen and (max-width:'770px') {
-  .login-btn{
-    width:65vw;
-  }
-  .login-container{
-    width: 80vw;
-  }
-  .footer{
-    font-size: 1.5em;
-  }
-  .header{
-    font-size: 3em;
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////First Design CSS
+
+// .app {
+//   width: 100vw;
+//   height: 100vh;
+//   background: $primary-col;
+//   color: #dee3ea;
+//   font-family: Inter, sans-serif;
+// }
+// .sec-col {
+//   color: $sec-col;
+// }
+// .loginMain {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   // justify-content: space-evenly;//Not applying on It's children ???
+// }
+// .loginHeader {
+//   // flex-shrink: 1;
+//   // flex-grow: 1;
+//   margin-top: 2vh;
+// }
+// .loginContainer {
+//   background: $primary-col2;
+//   width: 50vw;
+//   height: 50vh;
+//   box-shadow: 0 0 1px 1px $primary-col2;
+//   border: none;
+//   border-radius: 1em;
+//   padding: 5vw;
+//   display: flex;
+//   flex-direction: column;
+//   margin-bottom: 10em;
+//   margin-top: 10vh;
+//   //  flex-grow: 2;
+//   .login-btn {
+//         background: #323d4d;
+//         width: 45vw;
+//         height: 6vh;
+//         border: none;
+//         color: inherit;
+//         border-radius: 10px;
+//         box-shadow: 0 0 1px 1px #455266;
+//         margin-top: 10vh;
+//         align-self: center;
+//   }
+// }
+
+// .homeMain {
+//   @include flexColumn();
+//   .main {
+//     margin-top: 7vh;
+//     width: 90vw;
+//     height: 50vh;
+//     display: flex;
+//     justify-content: center;
+//     text-align: center;
+//     .centerContainer {
+//         flex-grow: 4;
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//         width: 45vw;
+//         *{
+//           text-align: center;
+//           color: inherit;
+//         }
+//         .searchBar{
+//           background: $primary-col2;
+//           width:60vw;
+//           height:7vh;
+//           border-radius:20px;
+          
+//           input,button{
+//             border:none;
+//             background:none;
+//             height:7vh;
+//             outline: none;
+//           }
+//           input{
+//             width:90%;
+//             text-align:center;
+//             color:#fff;
+//             border-right: 2px solid#0b0e11;
+//             text-transform: uppercase;
+//           }
+//           input::placeholder{
+//             color: #a7abaf;
+//           }
+//           button{
+//             width:9%;
+//           }
+//         }
+//         .logCard{
+//           background: $primary-col2;
+//           width: 60vw;
+//           height: 15vh;
+//           margin-top: 3vh;
+//           border-radius: 15px;
+//           display: flex;
+//           justify-content: space-between;
+//           h4{
+//             height: 5vh;
+//             font-weight: 700;
+//             width: fit-content;
+//             padding-left: 1em;
+//             margin-top: 0.5em;
+//             flex-grow: 10;
+//             text-align: start;
+//           }
+//           .logDate{
+//             height: 5vh;
+//             margin-top: 0.7em;
+//             flex-grow: 1;
+//           }
+//           // background: $primary-col2;
+//         }
+//     }
+//     .leftContainer,.rightContainer {
+//       border: 1px solid $sec-col;
+//       flex-grow: 2;
+//   }
+//   }
+// }
+// .footer {
+//   position: fixed;
+//   left: 0;
+//   bottom: 0;
+//   width: 100%;
+//   display: flex;
+//   justify-content: space-between;
+//   padding-left: 10px;
+//   align-items: center;
+//   font-size: 2rem;
+// }
+// .myName {
+//   padding: 1.3em;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
+// .myName > span {
+//   margin-left: 8px;
+// }
+// .connect {
+//   margin-right: 30px;
+// }
+
+// .tag-pills {
+//   // background-color: rgb(102, 100, 228);
+//   border-radius: 1.7em;
+//   border: none;
+//   margin-top: 1em;
+// }
+// @media screen and (max-width: "700px") {
+//   .login-btn {
+//     width: 65vw;
+//   }
+//   .loginContainer {
+//     width: 80vw;
+//   }
+//   .footer {
+//     font-size: 1.5em;
+//   }
+//   .loginHheader {
+//     font-size: 3em;
+//   }
+//   .logCard{
+//     width: 10px;
+//   }
+//   .leftContainer,.rightContainer{
+//     display: none;
+//   }
+//   .searchBar{
+//     width: 95px;
+//     input{
+//       width: 85%;
+//     }
+//     button{
+//       width: 15%;
+//     }
+//   }
+// }

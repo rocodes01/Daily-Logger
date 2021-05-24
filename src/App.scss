@@ -29,18 +29,17 @@ $text-col:#dee3ea;
   @include flexColumn(row,space-between);
   position: absolute;
   top:0;
-  // @include whiteBorder(white);
   padding: 10px;
   width: 90vw;
   .appName{
     h1{
       text-transform:uppercase;
+      font-size: 1.3em;
     }
     .subHeader{
       align-self: flex-end;
       // width: fit-content;
-      font-size: 1em;
-      // margin-left: 50%;
+      font-size: 0.5em;
       color: $sec-col;
     }
   }
@@ -49,25 +48,50 @@ $text-col:#dee3ea;
     right:0;
     top:15px;
     img{
-      border-radius: 10px;
+      border-radius: 50%;
       width: 50px;
     }
-    .menu{
-      position: fixed;
-      background: $inner-col;
-      border-radius: 5px;
-      text-align: center;
-      padding: 5px;
-      .logoutBtn{
-        background: none;
-        border:0;
-        outline: none;
-      }
-      .userName{
-        width: fit-content;
-        border-bottom: 1px solid $text-col;
-      }
-    }
+  }
+}
+.menu{
+  position: absolute;
+  width: 99vw;
+  height: 50vh;
+  // bottom: 0;
+  top:100vh;
+  background: $primary-col;
+  text-align: center;
+  z-index: 5;
+  display: none;
+
+  .menu-item{
+    width: inherit;
+    @include flexColumn(row,flex-start );
+    height: 4em;
+    gap:5px;
+    border-bottom: 1px solid $sec-col;
+    font-size: 1em;
+    padding-left: 20px;
+    font-weight: 700;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  &-item:last-child{
+    border-bottom: 0px;
+    
+  }
+}
+.menuShow{
+  animation: showMenu 0.3s linear both;
+  display: block;
+}
+@keyframes showMenu {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+      transform: translateY(-50vh);
   }
 }
 .login{
@@ -104,62 +128,58 @@ $text-col:#dee3ea;
 
   }
 }
-  // @include flexColumn(column,space-between);
 .main{
-    @include flexColumn(row,space-evenly);
-
+  @include flexColumn(row,space-evenly );
     gap:1em;
-    width:90vw;
-    height: 60vh;
+    width:99vw;
+    height: 70vh;
     // margin-top: 5vh;
     border-radius: 10px;
     >*{
-      background: $inner-col;
       border-radius: 1em;
     }
     &-center{
-      @include flexColumn(column,space-between);
+      @include flexColumn(column,flex-start);
       flex-grow: 3;
       height: inherit;
       width: inherit;
       &-search{
-        width:80vw;
+        @include flexColumn(row,space-between);
+
+        width:95vw;
         height:50px;
         margin-top: 10px;
-        input,button{
-          background: $primary-col;
+        .searchBtn{
+          background: $inner-col;
           border:none;
-          // background:none;
-          height:inherit;
-          outline: none;
+          height:50px;
           color: #a7abaf;
+          border-radius:50%;
+          max-width:50px;
         }
-        input{
-          width:50%;
-          text-align:center;
-          border-radius:10px 0 0 10px;
+        .addnew{
+          width: fit-content;
+          margin-left: 15px;
+          height: 40px;
+          background: $sec-col;
+          color:inherit;
+          border-radius: 15px;
+          border:none;
         }
-        button{
-            border-radius:0 10px 10px 0;
-            border-left: 1px solid #fff ;
-            border-left-style:inset ;
-            width:10%;
-          }
-          select{
-            width: 35%;
-            margin-left: 15px;
-            height: 40px;
-            background: none;
-            border:1px solid $sec-col;
-            color:inherit;
-            border-radius: 5px;
-            option{
-              background: inherit;
-            }
-          }
       }
-      .logCard{
-        
+      .log{
+        @include flexColumn(column,flex-start );
+        margin: 1em;
+        overflow-y: scroll;
+        &-card{
+          @include flexColumn(row,space-between );
+          padding: 0 15px 0 15px;
+          background: $inner-col;
+          width: 95vw;
+          min-height:80px;
+          border-radius: 1em;
+          margin:5px;
+        }
       }
     }
     &-left,&-right{
@@ -174,10 +194,26 @@ $text-col:#dee3ea;
       width: 30vw;
     }
   }
+  .main{
+    &-left,&-right{
+      display: block;
+      flex-grow: 1;
+    }
+    &-center{
+      flex-grow: 2;
+      width: 55vw;
+      &-search,.log{
+        width: 50vw;
+      }
+      .log{
+        &-card{
+          width: 48vw;
+        }
+      }
+    }
+  }
+
 }
-
-
-
 .footer {
   position: fixed;
   left: 0;

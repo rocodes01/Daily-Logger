@@ -16,6 +16,7 @@ const Login = ({ onSuccess }) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;
         var user = result.user;
+        console.log(user);
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("token", token);
         onSuccess(token);

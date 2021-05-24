@@ -4,7 +4,7 @@ import Loader from "./components/loader";
 import Home from "./components/home/Home";
 import Footer from "./components/footer/Footer";
 import Login from "./components/login/login";
-import { Power } from "react-bootstrap-icons";
+import { Person, Power } from "react-bootstrap-icons";
 import {
   Switch,
   Route,
@@ -38,6 +38,7 @@ const App = () => {
         // An error happened.
       });
   };
+  console.log(showMenu);
   return (
     <div className="app">
       <header className="header">
@@ -52,30 +53,29 @@ const App = () => {
               alt="user profile"
               onClick={() => setShowMenu(!showMenu)}
             />
-            {!showMenu && (
-              <div className="menu">
-                <p className="userName">{user?.displayName}</p>
-                <button
-                  className="logoutBtn"
-                  onClick={() => {
-                    logout();
-                    setShowMenu(false);
-                  }}
-                >
-                  <Power fill={"#e73b33"} />
-                </button>
-              </div>
-            )}
           </div>
         )}
       </header>
       {token.length > 0 ? (
         <Switch>
-          <Route path="/">
-            <Home user={user} />
+          <Route exact path="/">
+            <Home
+              user={user}
+              onMenuShow={() => {
+                setShowMenu(false);
+              }}
+            />
           </Route>
-          <Route path="/home">
-            <Home user={user} />
+          <Route exact path="/loader">
+            <Loader />
+          </Route>
+          <Route path="/">
+            <Home
+              user={user}
+              onMenuShow={() => {
+                setShowMenu(false);
+              }}
+            />
           </Route>
         </Switch>
       ) : (
@@ -88,6 +88,24 @@ const App = () => {
           </Route>
         </Switch>
       )}
+      <div className={`menu ${showMenu && "menuShow"}`}>
+        <div className="menu-exit" onClick={() => setShowMenu(false)}>
+          ---
+        </div>
+        <div className="menu-item profile">
+          <Person fill={"#e73b33"} /> Profile
+        </div>
+        <div
+          className="menu-item logoutBtn"
+          onClick={() => {
+            logout();
+            setShowMenu(false);
+          }}
+        >
+          <Power fill={"#e73b33"} />
+          Logout
+        </div>
+      </div>
       <Footer />
     </div>
   );
